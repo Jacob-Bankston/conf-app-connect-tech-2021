@@ -8,6 +8,11 @@ type Talk = {
   abstract: string;
 }
 
+type Errors = {
+  title: string | null;
+  abstract: string | null;
+}
+
 const newTalk: Talk = {
   title: "",
   abstract: "",
@@ -22,6 +27,16 @@ export default function Home() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop postback
+
+
+  }
+
+  function validate() {
+    const errors: Errors = {
+      title: null,
+      abstract: null,
+    };
+    if (!talk.title) errors.title = "Title is required.";
   }
 
   return (
