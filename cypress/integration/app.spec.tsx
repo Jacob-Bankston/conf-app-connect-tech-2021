@@ -14,7 +14,7 @@ it('should require all fields', () => {
   cy.findByText("Abstract is required.");
 });
 
-it.only('should save talk submission', () => {
+it('should save talk submission', () => {
   cy.visit("http://localhost:3000");
   cy.findByLabelText("Title").type("React Intro");
   cy.findByLabelText("Abstract").type("Intro to React.");
