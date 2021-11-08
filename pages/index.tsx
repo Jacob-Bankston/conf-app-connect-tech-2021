@@ -34,6 +34,8 @@ export default function Home() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop postback
     setStatus("Submitted");
+
+    // TODO: Actually save stuff.
   }
 
   function validate() {
