@@ -36,11 +36,12 @@ export default function Home() {
     event.preventDefault(); // stop postback
     setStatus("Submitted");
     debugger;
-    if (!isValid) return;
+    if (isValid) {
+      // TODO: Actually save stuff.
+      setStatus("Complete");
+      setTalk(newTalk); // Clear the form
+    };
 
-    // TODO: Actually save stuff.
-    setStatus("Complete");
-    setTalk(newTalk); // Clear the form
   }
 
   function validate() {
