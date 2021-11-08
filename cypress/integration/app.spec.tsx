@@ -14,12 +14,17 @@ it('should require all fields', () => {
 });
 
 it('should save talk submission', () => {
- cy.visit("http://localhost:3000");
- cy.findByLabelText("Title").type("React Intro");
- cy.findByLabelText("Abstract").type("Intro to React.");
- cy.findByText("Submit talk").click();
+  cy.visit("http://localhost:3000");
+  cy.findByLabelText("Title").type("React Intro");
+  cy.findByLabelText("Abstract").type("Intro to React.");
+  cy.findByText("Submit talk").click();
 
- // Now expect submitted talk to display
- cy.findByText("React Intro");
+  // Now the form should be empty
+  cy.findByLabelText("Title").should("have.value", "");
+  cy.findByLabelText("Abstract").should("have.value", "");
+
+  // Now expect submitted talk to display
+  cy.findByText("React Intro");
 
 });
+
