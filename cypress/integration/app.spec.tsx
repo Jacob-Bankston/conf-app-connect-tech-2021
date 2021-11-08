@@ -2,6 +2,11 @@
 
 it('should require all fields', () => {
   cy.visit("http://localhost:3000");
+
+  // Assure that error messages don't display on initial load
+  cy.findByText("Title is required.").should("not.exist");
+  cy.findByText("Abstract is required.").should("not.exist");
+
   cy.findByText("Submit talk").click();
 
   // Now validation errors should display
