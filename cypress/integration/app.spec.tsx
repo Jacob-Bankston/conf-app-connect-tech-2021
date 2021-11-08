@@ -18,4 +18,8 @@ it('should save talk submission', () => {
  cy.findByLabelText("Title").type("React Intro");
  cy.findByLabelText("Abstract").type("Intro to React.");
  cy.findByText("Submit talk").click();
+
+ // Now expect submitted talk to display
+ cy.findByText("React Intro");
+
 });
