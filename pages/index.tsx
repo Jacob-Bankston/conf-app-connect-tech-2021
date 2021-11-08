@@ -1,8 +1,25 @@
 import Head from "next/head";
 import Image from "next/image";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import styles from "../styles/Home.module.css";
 
+type Talk = {
+  title: string;
+  abstract: string;
+}
+
+const newTalk: Talk = {
+  title: "",
+  abstract: "",
+}
+
 export default function Home() {
+  const [talk, setTalk] = useState(newTalk);
+
+  function onChange(event: ChangeEvent<HTMLInputElement) {
+    setTalk({ ...talk, [event.target.id]: event.target.value });
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +30,21 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Speak at ConnectTech!</h1>
+
+        <form>
+          <h2>Submit a talk</h2>
+          <div>
+            <label htmlFor="title">Title</label>
+            <br />
+            <input type="text" id="title" value={talk.title} onChange={onChange} />
+          </div>
+          <div>
+            <label htmlFor="abstract">Abstract</label>
+            <br />
+            <textarea id="abstract" value={talk.abstract} onChange={onChange} />
+          </div>
+          <input type="submit" value="Submit talk" />
+        </form>
       </main>
 
       <footer className={styles.footer}>
