@@ -21,14 +21,15 @@ const newTalk: Talk = {
 export default function Home() {
   const [talk, setTalk] = useState(newTalk);
 
+  // Derived state
+  const errors  = validate();
+
   function onChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setTalk({ ...talk, [event.target.id]: event.target.value });
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop postback
-
-
   }
 
   function validate() {
@@ -58,11 +59,13 @@ export default function Home() {
             <label htmlFor="title">Title</label>
             <br />
             <input type="text" id="title" value={talk.title} onChange={onChange} />
+            { errors.title && <p>{errors.title}</p> }
           </div>
           <div>
             <label htmlFor="abstract">Abstract</label>
             <br />
             <textarea id="abstract" value={talk.abstract} onChange={onChange} />
+            { errors.abstract && <p>{errors.abstract}</p> }
           </div>
           <input type="submit" value="Submit talk" />
         </form>
