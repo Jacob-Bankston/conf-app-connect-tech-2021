@@ -23,6 +23,7 @@ const newTalk: Talk = {
 export default function Home() {
   const [talk, setTalk] = useState(newTalk);
   const [status, setStatus] = useState<Status>("Idle");
+  const [talks, setTalks] = useState<Talk[]>([]);
 
   // Derived state
   const errors  = validate();
@@ -31,19 +32,7 @@ export default function Home() {
   function onChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setTalk({ ...talk, [event.target.id]: event.target.value });
   }
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); // stop postback
-    setStatus("Submitted");
-    debugger;
-    if (isValid) {
-      // TODO: Actually save stuff.
-      setStatus("Complete");
-      setTalk(newTalk); // Clear the form
-    };
-
-  }
-
+  
   function validate() {
     const errors: Errors = {
       title: null,
@@ -53,6 +42,18 @@ export default function Home() {
     if (!talk.abstract) errors.abstract = "Abstract is required.";
     
     return errors;
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // stop postback
+    setStatus("Submitted");
+    debugger;
+    if (isValid) {
+      // TODO: Actually save stuff.
+      setTalks([...talks, talk]);
+      setStatus("Complete");
+      setTalk(newTalk); // Clear the form
+    };
   }
 
   return (
@@ -65,6 +66,13 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Speak at ConnectTech!</h1>
+
+        <section>
+          <h2>Submitted Talks</h2>
+          <ul>
+            { talks.map((t) => (<li key={t.title}>{t.title}</li>))}
+          </ul>
+        </section>
 
         <form onSubmit={handleSubmit}>
           <h2>Submit a talk</h2>
