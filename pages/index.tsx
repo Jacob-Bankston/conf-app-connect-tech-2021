@@ -37,6 +37,8 @@ export default function Home() {
       abstract: null,
     };
     if (!talk.title) errors.title = "Title is required.";
+    if (!talk.abstract) errors.abstract = "Abstract is required.";
+    return errors;
   }
 
   return (
