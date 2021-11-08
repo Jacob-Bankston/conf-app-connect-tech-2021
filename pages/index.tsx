@@ -13,6 +13,8 @@ type Errors = {
   abstract: string | null;
 }
 
+type Status = "Idle" | "Submitted" | "Complete";
+
 const newTalk: Talk = {
   title: "",
   abstract: "",
@@ -20,6 +22,7 @@ const newTalk: Talk = {
 
 export default function Home() {
   const [talk, setTalk] = useState(newTalk);
+  const [status, setStatus] = useState<Status>("Idle");
 
   // Derived state
   const errors  = validate();
