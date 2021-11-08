@@ -16,7 +16,7 @@ const newTalk: Talk = {
 export default function Home() {
   const [talk, setTalk] = useState(newTalk);
 
-  function onChange(event: ChangeEvent<HTMLInputElement) {
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
     setTalk({ ...talk, [event.target.id]: event.target.value });
   }
 
