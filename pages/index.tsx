@@ -33,6 +33,7 @@ export default function Home() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop postback
+    setStatus("Submitted");
   }
 
   function validate() {
@@ -40,8 +41,12 @@ export default function Home() {
       title: null,
       abstract: null,
     };
-    if (!talk.title) errors.title = "Title is required.";
-    if (!talk.abstract) errors.abstract = "Abstract is required.";
+    if (status === "Submitted" && !talk.title) {
+      errors.title = "Title is required.";
+    }
+    if (status === "Submitted" && !talk.abstract) {
+      errors.abstract = "Abstract is required.";
+    }
     return errors;
   }
 
