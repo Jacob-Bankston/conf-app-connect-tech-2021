@@ -49,12 +49,9 @@ export default function Home() {
       title: null,
       abstract: null,
     };
-    if (status === "Submitted" && !talk.title) {
-      errors.title = "Title is required.";
-    }
-    if (status === "Submitted" && !talk.abstract) {
-      errors.abstract = "Abstract is required.";
-    }
+    if (!talk.title) errors.title = "Title is required.";
+    if (!talk.abstract) errors.abstract = "Abstract is required.";
+    
     return errors;
   }
 
@@ -75,13 +72,13 @@ export default function Home() {
             <label htmlFor="title">Title</label>
             <br />
             <input type="text" id="title" value={talk.title} onChange={onChange} />
-            { errors.title && <p>{errors.title}</p> }
+            { errors.title && status === "Submitted" && <p>{errors.title}</p> }
           </div>
           <div>
             <label htmlFor="abstract">Abstract</label>
             <br />
             <textarea id="abstract" value={talk.abstract} onChange={onChange} />
-            { errors.abstract && <p>{errors.abstract}</p> }
+            { errors.abstract && status === "Submitted" && <p>{errors.abstract}</p> }
           </div>
           <input type="submit" value="Submit talk" />
         </form>
