@@ -26,6 +26,7 @@ export default function Home() {
 
   // Derived state
   const errors  = validate();
+  const isValid = Object.entries(errors).every(([, error]) => !error);
 
   function onChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setTalk({ ...talk, [event.target.id]: event.target.value });
@@ -34,8 +35,12 @@ export default function Home() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop postback
     setStatus("Submitted");
+    debugger;
+    if (!isValid) return;
 
     // TODO: Actually save stuff.
+    setStatus("Complete");
+    setTalk(newTalk); // Clear the form
   }
 
   function validate() {
